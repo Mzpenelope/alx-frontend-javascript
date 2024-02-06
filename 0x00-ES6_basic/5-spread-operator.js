@@ -1,3 +1,10 @@
-export default function concatArrays(array1, array2, string) {
-  return [...array1, ...array2, ...string];
+export default function concatArrays(...args) {
+  return args.reduce((result, current) => {
+    if (Array.isArray(current)) {
+      return [...result, ...current];
+    } else if (typeof current === 'string') {
+      return [...result, ...current.split('')];
+    }
+    return result;
+  }, []);
 }
